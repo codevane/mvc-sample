@@ -1,0 +1,17 @@
+From last day, need to consider these following - 
+1. Email Sending, 
+2. Error Log,
+3. Audit log,
+4. SP Calling and
+5. Role, Permission 
+
+======= ----------------------------------------------- =======
+
+Example of 
+-----------
+1. Email Sending     >>>>  HomeController > Contact (Line: 38)
+2. Error Log         >>>>  EmployeesController > Edit (Line 103)
+3. Audit log         >>>>  EmployeesController > Create (Line 58)
+4. 4.1 SP Calling    >>>>  HomeController > Auditlog (Line 52)
+   4.2 SQL query     >>>>  EmployeesController > Index (Line 22)
+5. Role, Permission  >>>>  TODO: 

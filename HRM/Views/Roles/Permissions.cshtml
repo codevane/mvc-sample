@@ -1,0 +1,88 @@
+﻿@model HRM.Models.Role
+
+@{
+    ViewBag.Title = "Permissions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Role Permissions</h2>
+<hr />
+<h3>Role Information</h3>
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Description)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.ActiveStatus)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.ActiveStatus)
+    </dd>
+
+</dl>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h3>Permissions</h3>
+    @{
+        Guid currentModule = Guid.Empty;
+
+        if (Model.RolePermissions != null)
+        {
+
+            foreach (var item in Model.RolePermissions)
+            {
+
+                if (currentModule != item.ModuleId)
+                {
+                    <div style="padding-top:20px;">
+                        <span> Module: @Html.Raw(item.Module.Name)</span>
+                    </div>
+                }
+
+                <div style="padding-left:50px;" class="checkbox">
+                    @Html.EditorFor(model => item.Permission)
+                    <span>@Html.Raw(item.PermissionName)</span>
+                </div>
+                
+                currentModule = item.ModuleId;
+            }
+        }
+
+    }
+    <br />
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+    <div>
+        @Html.ActionLink("Back to Details", "Details", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
